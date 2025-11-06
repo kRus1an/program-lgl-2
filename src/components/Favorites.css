@@ -1,0 +1,240 @@
+/* Строки 1-7: Контейнер страницы избранного */
+.favorites-page {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: 70vh;
+}
+
+/* Строки 9-16: Шапка страницы с кнопками */
+.favorites-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* Строки 18-29: Заголовок страницы */
+.favorites-header h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* Строки 31-45: Кнопка "Назад" */
+.back-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #2980b9;
+}
+
+/* Строки 47-61: Кнопка "Очистить все" */
+.clear-all-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.clear-all-button:hover {
+  background-color: #c0392b;
+}
+
+/* Строки 63-74: Счетчик товаров */
+.favorites-count {
+  font-size: 1.1rem;
+  color: #555;
+  margin-bottom: 1.5rem;
+}
+
+.favorites-count strong {
+  color: #e74c3c;
+  font-size: 1.2rem;
+}
+
+/* Строки 76-82: Сетка с избранными товарами */
+.favorites-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+/* Строки 84-93: Карточка избранного товара */
+.favorite-card {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
+}
+
+.favorite-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Строки 99-106: Контейнер изображения */
+.favorite-image {
+  height: 180px;
+  background-color: #f8f9fa;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Строки 108-114: Само изображение */
+.favorite-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.favorite-card:hover .favorite-image img {
+  transform: scale(1.05);
+}
+
+/* Строки 120-135: Кнопка удаления из избранного */
+.remove-favorite-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  transition: all 0.3s;
+}
+
+.remove-favorite-btn:hover {
+  background: rgba(255, 255, 255, 1);
+  transform: rotate(90deg);
+}
+
+/* Строки 147-159: Название товара */
+.favorite-card h3 {
+  padding: 1rem 1rem 0.5rem;
+  color: #2c3e50;
+  font-size: 1.1rem;
+  min-height: 3.5rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Строки 161-173: Описание товара */
+.favorite-card p {
+  padding: 0 1rem;
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-height: 4.5rem;
+  margin-bottom: 1rem;
+}
+
+/* Строки 175-183: Цена товара */
+.favorite-price {
+  padding: 1rem;
+  border-top: 1px solid #eee;
+}
+
+.favorite-price .price {
+  font-weight: bold;
+  color: #e74c3c;
+  font-size: 1.2rem;
+}
+
+/* Строки 185-203: Пустое избранное */
+.empty-favorites {
+  text-align: center;
+  padding: 4rem 2rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.empty-icon {
+  font-size: 5rem;
+  margin-bottom: 1rem;
+}
+
+.empty-favorites h2 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.empty-favorites p {
+  color: #7f8c8d;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+/* Строки 217-230: Кнопка "Перейти к покупкам" */
+.go-shopping-button {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.go-shopping-button:hover {
+  background-color: #27ae60;
+}
+
+/* Строки 232-252: Адаптивный дизайн */
+@media (max-width: 768px) {
+  .favorites-page {
+    padding: 1rem;
+  }
+  
+  .favorites-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .favorites-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .favorites-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .empty-icon {
+    font-size: 3rem;
+  }
+}

@@ -11,7 +11,8 @@ import { store } from './store/store';
 // Строка 11: Импортирую компоненты
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
-// Строка 14: Импортирую стили
+import Favorites from './components/Favorites';
+// Строка 15: Импортирую стили
 import './App.css';
 
 // Строка 16: Главный компонент приложения
@@ -79,7 +80,7 @@ function App() {
               </motion.div>
             </Link>
             
-            {/* Строки 85-92: Навигационное меню */}
+            {/* Строки 85-102: Навигационное меню */}
             <nav className="nav">
               <Link to="/" style={{ textDecoration: 'none' }}>
                 <motion.span 
@@ -88,6 +89,17 @@ function App() {
                   whileTap={{ scale: 0.95 }}
                 >
                   Главная
+                </motion.span>
+              </Link>
+              
+              {/* Строки 96-102: Ссылка на страницу избранного */}
+              <Link to="/favorites" style={{ textDecoration: 'none' }}>
+                <motion.span 
+                  className="nav-link"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  ❤️ Избранное
                 </motion.span>
               </Link>
             </nav>
@@ -177,6 +189,9 @@ function App() {
               
               {/* Строка 180: Маршрут для детальной страницы товара */}
               <Route path="/product/:id" element={<ProductDetail />} />
+              
+              {/* Строка 183: Маршрут для страницы избранного */}
+              <Route path="/favorites" element={<Favorites />} />
             </Routes>
           </main>
 
