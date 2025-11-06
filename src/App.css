@@ -27,6 +27,83 @@ body {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  gap: 2rem;
+}
+
+/* Строки 31-40: Секция авторизации в header */
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Строки 42-50: Информация о пользователе */
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user-name {
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+}
+
+/* Строки 60-73: Кнопка выхода */
+.logout-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s;
+}
+
+.logout-button:hover {
+  background-color: #c0392b;
+}
+
+/* Строки 79-85: Контейнер кнопок входа/регистрации */
+.auth-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Строки 91-104: Кнопка входа */
+.login-button {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.login-button:hover {
+  background-color: white;
+  color: #2c3e50;
+}
+
+/* Строки 110-123: Кнопка регистрации */
+.register-button {
+  background-color: #3498db;
+  color: white;
+  border: 2px solid #3498db;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s;
+}
+
+.register-button:hover {
+  background-color: #2980b9;
+  border-color: #2980b9;
 }
 
 .logo {

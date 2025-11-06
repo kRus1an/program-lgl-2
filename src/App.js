@@ -1,9 +1,9 @@
 // Строка 1: Импортирую React и хуки
-import React from 'react';
+import React, { useEffect } from 'react';
 // Строка 3: Импортирую компоненты для роутинга
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 // Строка 5: Импортирую Provider для подключения Redux store
-import { Provider } from 'react-redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
 // Строка 7: Импортирую motion для анимаций
 import { motion } from 'framer-motion';
 // Строка 9: Импортирую Redux store
@@ -13,12 +13,30 @@ import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Favorites from './components/Favorites';
 import Basket from './components/Basket';
-// Строка 16: Импортирую стили
+import Register from './components/Register';
+import Login from './components/Login';
+// Строка 18: Импортирую action для восстановления сессии
+import { restoreSession, logout } from './store/authSlice';
+// Строка 20: Импортирую стили
 import './App.css';
 
-// Строка 16: Главный компонент приложения
-function App() {
-  // Строки 18-26: Настройки анимаций для кнопки
+// Строка 23: Внутренний компонент с логикой приложения
+function AppContent() {
+  // Строка 25: Получаю dispatch и данные пользователя из Redux
+  const dispatch = useDispatch();
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  
+  // Строки 29-33: При загрузке приложения восстанавливаю сессию из localStorage
+  useEffect(() => {
+    dispatch(restoreSession());
+  }, [dispatch]);
+  
+  // Строки 35-40: Обработчик выхода
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+  
+  // Строки 42-50: Настройки анимаций для кнопки
   const buttonHover = {
     scale: 1.05,
     boxShadow: '0 5px 15px rgba(0,0,0,0.2)'
@@ -56,66 +74,100 @@ function App() {
     boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
   };
 
-  // Строки 60-250: Возвращаю JSX разметку
+  // Строки 70-280: Возвращаю JSX разметку
   return (
-    // Строка 62: Оборачиваю приложение в Provider для доступа к Redux store
-    <Provider store={store}>
-      {/* Строка 64: Оборачиваю в Router для работы маршрутизации */}
-      <Router>
-        <div className="app">
-          {/* Строки 66-92: Header с навигацией */}
-          <motion.header 
-            className="header"
-            initial={{ y: -100 }}
-            animate={{ y: 0 }}
-            transition={{ type: 'spring', stiffness: 100 }}
+    <div className="app">
+      {/* Строки 73-140: Header с навигацией */}
+      <motion.header 
+        className="header"
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ type: 'spring', stiffness: 100 }}
+      >
+        {/* Строки 79-87: Логотип с ссылкой на главную */}
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <motion.div 
+            className="logo"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
           >
-            {/* Строки 72-77: Логотип с ссылкой на главную */}
-            <Link to="/" style={{ textDecoration: 'none' }}>
-              <motion.div 
-                className="logo"
+            Корзина Покупок
+          </motion.div>
+        </Link>
+        
+        {/* Строки 89-125: Навигационное меню */}
+        <nav className="nav">
+          <Link to="/" style={{ textDecoration: 'none' }}>
+            <motion.span 
+              className="nav-link active"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              Главная
+            </motion.span>
+          </Link>
+          
+          <Link to="/favorites" style={{ textDecoration: 'none' }}>
+            <motion.span 
+              className="nav-link"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              ❤️ Избранное
+            </motion.span>
+          </Link>
+          
+          <Link to="/basket" style={{ textDecoration: 'none' }}>
+            <motion.span 
+              className="nav-link"
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              🛒 Корзина
+            </motion.span>
+          </Link>
+        </nav>
+        
+        {/* Строки 127-155: Информация о пользователе или кнопки входа/регистрации */}
+        <div className="auth-section">
+          {isAuthenticated ? (
+            // Если пользователь авторизован - показываю его имя и кнопку выхода
+            <div className="user-info">
+              <span className="user-name">👤 {user.name}</span>
+              <motion.button
+                className="logout-button"
+                onClick={handleLogout}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
-                Корзина Покупок
-              </motion.div>
-            </Link>
-            
-            {/* Строки 85-102: Навигационное меню */}
-            <nav className="nav">
-              <Link to="/" style={{ textDecoration: 'none' }}>
-                <motion.span 
-                  className="nav-link active"
-                  whileHover={{ scale: 1.1 }}
+                Выйти
+              </motion.button>
+            </div>
+          ) : (
+            // Если не авторизован - показываю кнопки входа и регистрации
+            <div className="auth-buttons">
+              <Link to="/login">
+                <motion.button
+                  className="login-button"
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  Главная
-                </motion.span>
+                  Войти
+                </motion.button>
               </Link>
-              
-              {/* Строки 96-102: Ссылка на страницу избранного */}
-              <Link to="/favorites" style={{ textDecoration: 'none' }}>
-                <motion.span 
-                  className="nav-link"
-                  whileHover={{ scale: 1.1 }}
+              <Link to="/register">
+                <motion.button
+                  className="register-button"
+                  whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  ❤️ Избранное
-                </motion.span>
+                  Регистрация
+                </motion.button>
               </Link>
-              
-              {/* Строки 106-112: Ссылка на страницу корзины */}
-              <Link to="/basket" style={{ textDecoration: 'none' }}>
-                <motion.span 
-                  className="nav-link"
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  🛒 Корзина
-                </motion.span>
-              </Link>
-            </nav>
-          </motion.header>
+            </div>
+          )}
+        </div>
+      </motion.header>
 
           {/* Строки 96-180: Основной контент с маршрутизацией */}
           <main className="main-content">
@@ -207,6 +259,12 @@ function App() {
               
               {/* Строка 186: Маршрут для страницы корзины */}
               <Route path="/basket" element={<Basket />} />
+              
+              {/* Строка 189: Маршрут для страницы регистрации */}
+              <Route path="/register" element={<Register />} />
+              
+              {/* Строка 192: Маршрут для страницы входа */}
+              <Route path="/login" element={<Login />} />
             </Routes>
           </main>
 
@@ -244,7 +302,16 @@ function App() {
               <p>&copy; {new Date().getFullYear()} Корзина Покупок. Все права защищены.</p>
             </motion.div>
           </motion.footer>
-        </div>
+    </div>
+  );
+}
+
+// Строки 305-315: Главный компонент App - оборачивает все в Provider и Router
+function App() {
+  return (
+    <Provider store={store}>
+      <Router>
+        <AppContent />
       </Router>
     </Provider>
   );
