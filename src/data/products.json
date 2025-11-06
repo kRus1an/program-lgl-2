@@ -1,0 +1,36 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Смартфон Samsung Galaxy S21",
+      "description": "6.2-дюймовый AMOLED дисплей, 8 ГБ ОЗУ, 128 ГБ памяти, тройная камера",
+      "price": 69990,
+      "rating": 4.7,
+      "image": "https://via.placeholder.com/300x300?text=Samsung+Galaxy+S21"
+    },
+    {
+      "id": 2,
+      "name": "Наушники Apple AirPods Pro",
+      "description": "Беспроводные наушники с активным шумоподавлением, белый",
+      "price": 19990,
+      "rating": 4.8,
+      "image": "https://via.placeholder.com/300x300?text=AirPods+Pro"
+    },
+    {
+      "id": 3,
+      "name": "Ноутбук ASUS ROG Zephyrus G14",
+      "description": "14-дюймовый игровой ноутбук, AMD Ryzen 9, 16 ГБ ОЗУ, RTX 3060",
+      "price": 124990,
+      "rating": 4.9,
+      "image": "https://via.placeholder.com/300x300?text=ASUS+ROG+G14"
+    },
+    {
+      "id": 4,
+      "name": "Умные часы Apple Watch Series 7",
+      "description": "45 мм, GPS + Cellular, синий",
+      "price": 45990,
+      "rating": 4.8,
+      "image": "https://via.placeholder.com/300x300?text=Apple+Watch+7"
+    }
+  ]
+}
