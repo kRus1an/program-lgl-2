@@ -12,7 +12,8 @@ import { store } from './store/store';
 import ProductList from './components/ProductList';
 import ProductDetail from './components/ProductDetail';
 import Favorites from './components/Favorites';
-// Строка 15: Импортирую стили
+import Basket from './components/Basket';
+// Строка 16: Импортирую стили
 import './App.css';
 
 // Строка 16: Главный компонент приложения
@@ -100,6 +101,17 @@ function App() {
                   whileTap={{ scale: 0.95 }}
                 >
                   ❤️ Избранное
+                </motion.span>
+              </Link>
+              
+              {/* Строки 106-112: Ссылка на страницу корзины */}
+              <Link to="/basket" style={{ textDecoration: 'none' }}>
+                <motion.span 
+                  className="nav-link"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  🛒 Корзина
                 </motion.span>
               </Link>
             </nav>
@@ -192,6 +204,9 @@ function App() {
               
               {/* Строка 183: Маршрут для страницы избранного */}
               <Route path="/favorites" element={<Favorites />} />
+              
+              {/* Строка 186: Маршрут для страницы корзины */}
+              <Route path="/basket" element={<Basket />} />
             </Routes>
           </main>
 

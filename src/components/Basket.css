@@ -1,0 +1,545 @@
+/* Строки 1-7: Контейнер страницы корзины */
+.basket-page {
+  max-width: 1400px;
+  margin: 2rem auto;
+  padding: 2rem;
+  min-height: 80vh;
+}
+
+/* Строки 9-15: Шапка страницы */
+.basket-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.basket-header h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+}
+
+/* Строки 23-28: Контейнер с секциями */
+.basket-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* Строки 30-38: Секция (этап) */
+.basket-section {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.basket-section h2 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.5rem;
+}
+
+/* Строки 48-61: Кнопка показать/скрыть товары */
+.toggle-products-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 1rem;
+  transition: background-color 0.3s;
+}
+
+.toggle-products-btn:hover {
+  background-color: #2980b9;
+}
+
+/* Строки 67-75: Выпадающий список товаров */
+.products-selector {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.products-grid-selector {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+/* Строки 82-98: Карточка товара в селекторе */
+.product-selector-card {
+  background: white;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.product-selector-card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+.product-selector-card h4 {
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+.product-selector-card .price {
+  color: #e74c3c;
+  font-weight: bold;
+  margin: 0.5rem 0;
+}
+
+/* Строки 114-127: Кнопка "Добавить в корзину" */
+.add-to-cart-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%;
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-btn:hover {
+  background-color: #27ae60;
+}
+
+/* Строки 129-135: Товары в корзине */
+.cart-items {
+  margin-top: 2rem;
+}
+
+.cart-items h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+/* Строки 141-156: Карточка товара в корзине */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+/* Строки 162-169: Информация о товаре */
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-info h4 {
+  margin: 0 0 0.5rem 0;
+  color: #2c3e50;
+}
+
+.cart-item-info .price {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+}
+
+/* Строки 177-196: Кнопки изменения количества */
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-controls button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+
+.quantity-controls button:hover {
+  background-color: #2980b9;
+}
+
+.quantity-controls span {
+  min-width: 30px;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* Строки 208-213: Итоговая цена товара */
+.item-total {
+  font-weight: bold;
+  color: #e74c3c;
+  min-width: 100px;
+  text-align: right;
+}
+
+/* Строки 215-228: Кнопка удаления товара */
+.remove-btn {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: all 0.3s;
+}
+
+.remove-btn:hover {
+  background-color: #c0392b;
+  transform: rotate(90deg);
+}
+
+/* Строки 234-244: Общая сумма корзины */
+.cart-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #3498db;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  margin-top: 1rem;
+}
+
+/* Строки 246-252: Форма заказа */
+.order-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Строки 254-264: Группа полей формы */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+/* Строки 270-282: Поля ввода */
+.form-group input {
+  padding: 0.8rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Строки 284-291: Список чекбоксов товаров */
+.products-checkboxes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+/* Строки 293-310: Элемент чекбокса */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.checkbox-item:hover {
+  border-color: #3498db;
+  background-color: #f8f9fa;
+}
+
+.checkbox-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.checkbox-item label {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  flex: 1;
+}
+
+.checkbox-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.checkbox-item label div {
+  flex: 1;
+}
+
+.checkbox-item label strong {
+  display: block;
+  color: #2c3e50;
+  margin-bottom: 0.25rem;
+}
+
+.checkbox-item label p {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Строки 350-363: Кнопка оформления заказа */
+.submit-order-btn {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-order-btn:hover {
+  background-color: #27ae60;
+}
+
+/* Строки 365-371: Список заказов */
+.orders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Строки 373-382: Карточка заказа */
+.order-card {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 10px;
+  border-left: 5px solid #3498db;
+}
+
+/* Строки 384-393: Шапка заказа */
+.order-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #ddd;
+}
+
+.order-header h3 {
+  color: #2c3e50;
+  margin: 0 0 0.5rem 0;
+}
+
+.order-date {
+  color: #7f8c8d;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Строки 409-424: Статус заказа */
+.order-status {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.order-status.delivered {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.order-status.pending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+/* Строки 426-435: Информация о покупателе */
+.order-info {
+  margin-bottom: 1rem;
+}
+
+.order-info p {
+  margin: 0.5rem 0;
+  color: #2c3e50;
+}
+
+/* Строки 437-460: Товары в заказе */
+.order-products {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+}
+
+.order-products strong {
+  display: block;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+}
+
+.order-product-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+}
+
+.order-product-item:last-child {
+  border-bottom: none;
+}
+
+.order-product-item img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.order-product-item div {
+  flex: 1;
+}
+
+.order-product-item p {
+  margin: 0.25rem 0;
+  color: #2c3e50;
+}
+
+.product-details {
+  color: #7f8c8d !important;
+  font-size: 0.9rem;
+}
+
+/* Строки 491-501: Итоговая сумма заказа */
+.order-total {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  background: #3498db;
+  color: white;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  margin: 1rem 0;
+}
+
+/* Строки 503-509: Кнопки управления заказом */
+.order-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Строки 511-524: Кнопка изменения статуса */
+.status-btn {
+  flex: 1;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.status-btn:hover {
+  background-color: #e67e22;
+}
+
+/* Строки 526-539: Кнопка удаления заказа */
+.delete-order-btn {
+  flex: 1;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.delete-order-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Строки 541-546: Пустое сообщение */
+.empty-message {
+  text-align: center;
+  padding: 2rem;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+/* Строки 548-580: Адаптивный дизайн */
+@media (max-width: 768px) {
+  .basket-page {
+    padding: 1rem;
+  }
+  
+  .basket-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .basket-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .products-grid-selector {
+    grid-template-columns: 1fr;
+  }
+  
+  .cart-item {
+    flex-wrap: wrap;
+  }
+  
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .order-actions {
+    flex-direction: column;
+  }
+}
