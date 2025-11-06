@@ -1,22 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import './App.css';
-import productsData from './data/products.json';
+// Строка 1: Импортирую React и хуки
+import React from 'react';
+// Строка 3: Импортирую компоненты для роутинга
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+// Строка 5: Импортирую Provider для подключения Redux store
+import { Provider } from 'react-redux';
+// Строка 7: Импортирую motion для анимаций
 import { motion } from 'framer-motion';
+// Строка 9: Импортирую Redux store
+import { store } from './store/store';
+// Строка 11: Импортирую компоненты
+import ProductList from './components/ProductList';
+import ProductDetail from './components/ProductDetail';
+// Строка 14: Импортирую стили
+import './App.css';
 
+// Строка 16: Главный компонент приложения
 function App() {
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  // Строки 18-26: Настройки анимаций для кнопки
+  const buttonHover = {
+    scale: 1.05,
+    boxShadow: '0 5px 15px rgba(0,0,0,0.2)'
+  };
 
-  useEffect(() => {
-    // Simulate API call
-    const timer = setTimeout(() => {
-      setProducts(productsData.products);
-      setIsLoading(false);
-    }, 1000);
+  const pulseAnimation = {
+    scale: [1, 1.05, 1],
+    transition: {
+      duration: 2,
+      repeat: Infinity,
+      repeatType: 'reverse'
+    }
+  };
 
-    return () => clearTimeout(timer);
-  }, []);
-
+  // Строки 34-37: Настройки анимаций для карточек преимуществ
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -39,202 +54,169 @@ function App() {
     boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
   };
 
-  const buttonHover = {
-    scale: 1.05,
-    boxShadow: '0 5px 15px rgba(0,0,0,0.2)'
-  };
-
-  const pulseAnimation = {
-    scale: [1, 1.05, 1],
-    transition: {
-      duration: 2,
-      repeat: Infinity,
-      repeatType: 'reverse'
-    }
-  };
+  // Строки 60-250: Возвращаю JSX разметку
   return (
-    <div className="app">
-      <motion.header 
-        className="header"
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: 'spring', stiffness: 100 }}
-      >
-        <motion.div 
-          className="logo"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          Корзина Покупок
-        </motion.div>
-        <nav className="nav">
-          {['Главная', 'Каталог', 'Корзина', 'Контакты'].map((item, index) => (
-            <motion.a 
-              key={index}
-              href="#" 
-              className={`nav-link ${index === 0 ? 'active' : ''}`}
-              whileHover={{ scale: 1.1 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {item}
-            </motion.a>
-          ))}
-        </nav>
-      </motion.header>
-
-      <main className="main-content">
-        <motion.section 
-          className="hero"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
+    // Строка 62: Оборачиваю приложение в Provider для доступа к Redux store
+    <Provider store={store}>
+      {/* Строка 64: Оборачиваю в Router для работы маршрутизации */}
+      <Router>
+        <div className="app">
+          {/* Строки 66-92: Header с навигацией */}
+          <motion.header 
+            className="header"
+            initial={{ y: -100 }}
+            animate={{ y: 0 }}
+            transition={{ type: 'spring', stiffness: 100 }}
           >
-            Добро пожаловать в наш интернет-магазин
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-          >
-            Широкий ассортимент товаров по выгодным ценам
-          </motion.p>
-          <motion.button 
-            className="cta-button"
-            whileHover={buttonHover}
-            whileTap={{ scale: 0.95 }}
-            animate={pulseAnimation}
-          >
-            В каталог
-          </motion.button>
-        </motion.section>
-
-        <motion.section 
-          className="features"
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {[
-            {
-              title: 'Быстрая доставка',
-              description: 'Доставка по всему городу в течение дня',
-              icon: '🚚'
-            },
-            {
-              title: 'Гарантия качества',
-              description: 'Только проверенные поставщики',
-              icon: '✅'
-            },
-            {
-              title: 'Поддержка 24/7',
-              description: 'Всегда готовы ответить на ваши вопросы',
-              icon: '🛎️'
-            }
-          ].map((feature, index) => (
-            <motion.div 
-              key={index}
-              className="feature-card"
-              variants={itemVariants}
-              whileHover={hoverVariant}
-            >
-              <div className="feature-icon">{feature.icon}</div>
-              <h3>{feature.title}</h3>
-              <p>{feature.description}</p>
-            </motion.div>
-          ))}
-        </motion.section>
-
-        <section className="popular-products">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Популярные товары
-          </motion.h2>
-          
-          {isLoading ? (
-            <div className="loading">Загрузка товаров...</div>
-          ) : (
-            <motion.div 
-              className="product-grid"
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {products.map((product) => (
-                <motion.div 
-                  key={product.id}
-                  className="product-card"
-                  variants={itemVariants}
-                  whileHover={hoverVariant}
+            {/* Строки 72-77: Логотип с ссылкой на главную */}
+            <Link to="/" style={{ textDecoration: 'none' }}>
+              <motion.div 
+                className="logo"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                Корзина Покупок
+              </motion.div>
+            </Link>
+            
+            {/* Строки 85-92: Навигационное меню */}
+            <nav className="nav">
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <motion.span 
+                  className="nav-link active"
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <div className="product-image">
-                    <img src={product.image} alt={product.name} />
-                    <div className="rating">
-                      {'★'.repeat(Math.floor(product.rating))}
-                      {'☆'.repeat(5 - Math.floor(product.rating))}
-                      <span> {product.rating}</span>
-                    </div>
-                  </div>
-                  <h3>{product.name}</h3>
-                  <p>{product.description}</p>
-                  <div className="product-footer">
-                    <span className="price">{product.price.toLocaleString()} ₽</span>
+                  Главная
+                </motion.span>
+              </Link>
+            </nav>
+          </motion.header>
+
+          {/* Строки 96-180: Основной контент с маршрутизацией */}
+          <main className="main-content">
+            {/* Строки 98-104: Настройка маршрутов (Routes) */}
+            {/* Route "/" - главная страница со списком товаров */}
+            {/* Route "/product/:id" - детальная страница товара */}
+            <Routes>
+              {/* Строка 103: Маршрут для главной страницы */}
+              <Route path="/" element={
+                <>
+                  {/* Строки 106-125: Hero секция (приветственный баннер) */}
+                  <motion.section 
+                    className="hero"
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <motion.h1
+                      initial={{ opacity: 0, y: -20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.3 }}
+                    >
+                      Добро пожаловать в наш интернет-магазин
+                    </motion.h1>
+                    <motion.p
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.5 }}
+                    >
+                      Широкий ассортимент товаров по выгодным ценам
+                    </motion.p>
                     <motion.button 
-                      className="add-to-cart"
+                      className="cta-button"
                       whileHover={buttonHover}
                       whileTap={{ scale: 0.95 }}
+                      animate={pulseAnimation}
                     >
-                      В корзину
+                      В каталог
                     </motion.button>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          )}
-        </section>
-      </main>
+                  </motion.section>
 
-      <motion.footer 
-        className="footer"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
-      >
-        <div className="footer-content">
-          <motion.div 
-            className="footer-section"
-            whileHover={{ x: 5 }}
+                  {/* Строки 139-165: Секция преимуществ */}
+                  <motion.section 
+                    className="features"
+                    initial="hidden"
+                    animate="visible"
+                    variants={containerVariants}
+                  >
+                    {[
+                      {
+                        title: 'Быстрая доставка',
+                        description: 'Доставка по всему городу в течение дня',
+                        icon: '🚚'
+                      },
+                      {
+                        title: 'Гарантия качества',
+                        description: 'Только проверенные поставщики',
+                        icon: '✅'
+                      },
+                      {
+                        title: 'Поддержка 24/7',
+                        description: 'Всегда готовы ответить на ваши вопросы',
+                        icon: '🛎️'
+                      }
+                    ].map((feature, index) => (
+                      <motion.div 
+                        key={index}
+                        className="feature-card"
+                        variants={itemVariants}
+                        whileHover={hoverVariant}
+                      >
+                        <div className="feature-icon">{feature.icon}</div>
+                        <h3>{feature.title}</h3>
+                        <p>{feature.description}</p>
+                      </motion.div>
+                    ))}
+                  </motion.section>
+
+                  {/* Строка 175: Компонент списка товаров */}
+                  <ProductList />
+                </>
+              } />
+              
+              {/* Строка 180: Маршрут для детальной страницы товара */}
+              <Route path="/product/:id" element={<ProductDetail />} />
+            </Routes>
+          </main>
+
+          {/* Строки 183-215: Footer (подвал сайта) */}
+          <motion.footer 
+            className="footer"
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
           >
-            <h3>О нас</h3>
-            <p>Лучший интернет-магазин с 2023 года</p>
-          </motion.div>
-          <motion.div 
-            className="footer-section"
-            whileHover={{ x: 5 }}
-          >
-            <h3>Контакты</h3>
-            <p>Email: info@basket-shop.ru</p>
-            <p>Телефон: +7 (XXX) XXX-XX-XX</p>
-          </motion.div>
+            <div className="footer-content">
+              <motion.div 
+                className="footer-section"
+                whileHover={{ x: 5 }}
+              >
+                <h3>О нас</h3>
+                <p>Лучший интернет-магазин с 2023 года</p>
+              </motion.div>
+              <motion.div 
+                className="footer-section"
+                whileHover={{ x: 5 }}
+              >
+                <h3>Контакты</h3>
+                <p>Email: info@basket-shop.ru</p>
+                <p>Телефон: +7 (XXX) XXX-XX-XX</p>
+              </motion.div>
+            </div>
+            <motion.div 
+              className="footer-bottom"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+            >
+              <p>&copy; {new Date().getFullYear()} Корзина Покупок. Все права защищены.</p>
+            </motion.div>
+          </motion.footer>
         </div>
-        <motion.div 
-          className="footer-bottom"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6 }}
-        >
-          <p>&copy; {new Date().getFullYear()} Корзина Покупок. Все права защищены.</p>
-        </motion.div>
-      </motion.footer>
-    </div>
+      </Router>
+    </Provider>
   );
 }
 

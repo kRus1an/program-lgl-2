@@ -1,0 +1,179 @@
+/* Строки 1-7: Контейнер детальной страницы товара */
+.product-detail {
+  max-width: 1200px;  /* Максимальная ширина */
+  margin: 2rem auto;  /* Центрирование по горизонтали */
+  padding: 2rem;
+  min-height: 70vh;   /* Минимальная высота экрана */
+}
+
+/* Строки 9-22: Кнопка "Назад" */
+.back-button {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: background-color 0.3s;
+}
+
+.back-button:hover {
+  background-color: #2980b9;  /* Темнее при наведении */
+}
+
+/* Строки 27-32: Контейнер с двумя колонками (изображение + информация) */
+.product-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;  /* Две равные колонки */
+  gap: 3rem;  /* Расстояние между колонками */
+  margin-top: 2rem;
+}
+
+/* Строки 34-40: Контейнер изображения товара */
+.product-detail-image {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Строки 42-46: Само изображение */
+.product-detail-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Строки 48-58: Рейтинг на детальной странице */
+.product-detail-rating {
+  margin-top: 1.5rem;
+  font-size: 1.5rem;
+  color: #ffd700;  /* Золотой цвет для звезд */
+  text-align: center;
+}
+
+.rating-number {
+  color: #333;  /* Черный цвет для числа */
+  font-size: 1rem;
+  margin-left: 0.5rem;
+}
+
+/* Строки 60-65: Контейнер информации о товаре */
+.product-detail-info {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Строки 67-72: Название товара */
+.product-detail-info h1 {
+  color: #2c3e50;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* Строки 74-82: Цена товара */
+.product-detail-price {
+  font-size: 2.5rem;
+  color: #e74c3c;  /* Красный цвет */
+  font-weight: bold;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+/* Строки 84-91: Секция описания */
+.product-detail-description {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.product-detail-description h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+.product-detail-description p {
+  color: #555;
+  line-height: 1.6;
+  font-size: 1.1rem;
+}
+
+/* Строки 103-110: Секция характеристик */
+.product-detail-specs {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.product-detail-specs h3 {
+  color: #2c3e50;
+  margin-bottom: 1rem;
+}
+
+/* Строки 116-123: Список характеристик */
+.product-detail-specs ul {
+  list-style: none;
+  padding: 0;
+}
+
+.product-detail-specs li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #ddd;
+  color: #555;
+}
+
+.product-detail-specs li:last-child {
+  border-bottom: none;  /* Убираю линию у последнего элемента */
+}
+
+/* Строки 131-136: Контейнер кнопок действий */
+.product-detail-actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Строки 138-151: Кнопка "Добавить в корзину" */
+.add-to-cart-detail {
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  padding: 1rem 2rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+  cursor: pointer;
+  flex: 1;  /* Занимает всю доступную ширину */
+  transition: background-color 0.3s;
+}
+
+.add-to-cart-detail:hover {
+  background-color: #27ae60;  /* Темнее при наведении */
+}
+
+/* Строки 157-175: Адаптивный дизайн для планшетов */
+@media (max-width: 768px) {
+  .product-detail-container {
+    grid-template-columns: 1fr;  /* Одна колонка на маленьких экранах */
+    gap: 2rem;
+  }
+  
+  .product-detail {
+    padding: 1rem;
+  }
+  
+  .product-detail-info h1 {
+    font-size: 1.5rem;
+  }
+  
+  .product-detail-price {
+    font-size: 2rem;
+  }
+}
